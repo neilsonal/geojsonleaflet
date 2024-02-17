@@ -19,7 +19,7 @@
      integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
      crossorigin=""></script>
 <style>
-    #map { height: 180px; }
+    #map { height: 100vh; }
 </style>
 
 </head>
@@ -27,11 +27,34 @@
 <body>
     <div id="map"></div>
 
-    <script> var map = L.map('map').setView([51.505, -0.09], 13); </script>
+    <script> 
+       var map = L.map('map').setView([29.6753, -82.3728], 11); 
+       var circle = L.circle([29.643454, -82.357635], {
+        color: 'green',
+        fillColor: 'green',
+        fillOpacity: 0.25,
+        radius: 1000
+    }).addTo(map);
+    var marker1 = L.marker([29.79358, -82.489471]).addTo(map);
+    var marker2 = L.marker([29.645095, -82.606888]).addTo(map);
+    var marker3 = L.marker([29.504607, -82.27953]).addTo(map);
+    var marker4 = L.marker([29.651062, -82.321243]).addTo(map);
+    circle.bindPopup("<b>Go Gators!</b><br>This circle demonstrates where the UF campus is.");
+marker1.bindPopup("<b>It's a town!</b><br>You've selected <b>Alachua</b> in Alachua County.").openPopup();
+marker2.bindPopup("<b>It's a town!</b><br>You've selected <b>Newberry</b> in Alachua County.").openPopup();
+marker3.bindPopup("<b>It's a town!</b><br>You've selected <b>Micanopy</b> in Alachua County.").openPopup();
+marker4.bindPopup("<b>It's a town!</b><br>You've selected <b>Gainesville</b> in Alachua County.").openPopup();
+    function onMapClick(e) {
+    alert("This is a map of Alachua County! Try selecting a marked area. You have clicked on the coordinate " + e.latlng);
+}
+
+map.on('click', onMapClick);
+    
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: 19,
         attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
     }).addTo(map);
+</script>
 </body>
 
 </html>

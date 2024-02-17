@@ -8,7 +8,7 @@
 
  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
- <title>Hello Leaflet</title>
+ <title>Hello GeoJSON</title>
 
      <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
      integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
@@ -28,7 +28,7 @@
     <div id="map"></div>
 
     <script> 
-       var map = L.map('map').setView([29.6753, -82.3728], 11); 
+       var map = L.map('map').setView([0,0], 5); 
        var circle = L.circle([29.643454, -82.357635], {
         color: 'green',
         fillColor: 'green',
@@ -54,6 +54,12 @@ map.on('click', onMapClick);
         maxZoom: 19,
         attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
     }).addTo(map);
+
+    fetch('map.geojson')
+ .then(response => response.json())
+ .then(data => {
+   L.geoJSON(data).addTo(map);
+ });
 </script>
 </body>
 
